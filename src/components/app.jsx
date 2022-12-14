@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./header";
 import Main from "./main";
 import Sider from "./sider";
+import backgroundImage from './images/background1.jpg'
 class App extends Component {
   state = {
     questions: [
@@ -494,6 +495,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <div style={{backgroundImage: `url(${backgroundImage})`, height: '100vh'}}>
         <div class="container text-center">
           <div class="row">
             <div class="col">
@@ -507,9 +509,9 @@ class App extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-1">
+            {/* <div className="col-1" style={{backgroundColor: 'purple', borderRadius: 10}}>
               <Sider />
-            </div>
+            </div> */}
             <div className="col">
               <Main
                 randomQuestions={this.state.randomQuestions}
@@ -525,6 +527,7 @@ class App extends Component {
               />
             </div>
           </div>
+        </div>
         </div>
       </React.Fragment>
     );

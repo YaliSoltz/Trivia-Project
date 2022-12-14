@@ -5,15 +5,16 @@ const Result = (props) => {
   const { score, randomQuestions, newGame } = props;
   return (
     <React.Fragment>
-      <div>
+      <div className="justify-content-center mt-4" style={{display: 'flex'}}>
+        <div  style={{backgroundColor:'whitesmoke', opacity:0.8, width: 500, overflowY: 'auto', height: '80vh' }}>
       <h1>  <span className={score<10 ? "badge  bg-warning": "badge lg bg-info"}>{score<10 ? 'Better luck next time':'King!!!'}</span></h1>
         <h2>
-          your result is: {score} of {randomQuestions.length}
+          Your result is: {score} of {randomQuestions.length}
         </h2>
         <div style={{ display: "flex", flexDirection: "column" }}>
           {randomQuestions.map((question, index) => (
             <div key={index}>
-            <p  style={{marginTop: 80}}> <span style={{fontSize:20, fontWeight: 'bold'}}>Q{index+1}</span> : {question.questionText}</p>
+            <p  style={{marginTop: 80, fontSize: 18, fontWeight: 'bold'}}> <span style={{fontSize:24, fontWeight: 'bold'}}>Q{index+1}</span>: {question.questionText}</p>
 
             {question.answerOptions.map((answerOptions) => (
               <button
@@ -35,6 +36,7 @@ const Result = (props) => {
             new game
           </button>
         </Link>
+        </div>
       </div>
     </React.Fragment>
   );

@@ -27,9 +27,9 @@ const Questions = (props) => {
 
   return (
     <React.Fragment>
-      <div style={{ backgroundImage: `url(${backgroundImg})`, height: "80vh" }}>
+      <div style={{ backgroundImage: `url(${backgroundImg})`, height: "86.2vh",display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
         <div>
-          <h2>{randomQuestions[currentQuestion].questionText}</h2>
+          <h1><span className="badge text-bg-info">{randomQuestions[currentQuestion].questionText}</span></h1>
         </div>
         <div style={{ marginLeft: 300, marginRight: 300 }}>
           <div
@@ -37,21 +37,27 @@ const Questions = (props) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "aqua",
+              borderStyle: 'dashed',
               borderRadius: 10,
+              justifyContent: 'center'
             }}
           >
-            {randomQuestions[currentQuestion].answerOptions.sort(()=> Math.random() - 0.5).map((answerOptions) => (
-              // <Link to={answerOptions.isCorrect ? '':'/result'}>
-              <button disabled={showScore ? 'disabled':''}
-                key={answerOptions.answerText}
-                className="btn btn-secondary m-1"
-                onClick={() => handleAnswerButtonClick(answerOptions.isCorrect)}
-              >
-                {answerOptions.answerText}
-              </button>
-              // </Link>
-            ))}
+            {randomQuestions[currentQuestion].answerOptions
+              .sort(() => Math.random() - 0.5)
+              .map((answerOptions) => (
+                // <Link to={answerOptions.isCorrect ? '':'/result'}>
+                <button
+                  disabled={showScore ? "disabled" : ""}
+                  key={answerOptions.answerText}
+                  className="btn btn-secondary m-1"
+                  onClick={() =>
+                    handleAnswerButtonClick(answerOptions.isCorrect)
+                  }
+                >
+                  {answerOptions.answerText}
+                </button>
+                // </Link>
+              ))}
           </div>
         </div>
         <div>

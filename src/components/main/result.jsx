@@ -2,15 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Result = (props) => {
-  const { score, questions, resetGame } = props;
+  const { score, randomQuestions, newGame } = props;
   return (
     <React.Fragment>
       <div>
-        <h1>
-          your result is: {score} of {questions.length}
-        </h1>
+      <h1>  <span className={score<10 ? "badge  bg-warning": "badge lg bg-info"}>{score<10 ? 'Better luck next time':'King!!!'}</span></h1>
+        <h2>
+          your result is: {score} of {randomQuestions.length}
+        </h2>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {questions.map((question, index) => (
+          {randomQuestions.map((question, index) => (
             <div key={index}>
             <p  style={{marginTop: 80}}> <span style={{fontSize:20, fontWeight: 'bold'}}>Q{index+1}</span> : {question.questionText}</p>
 
@@ -30,7 +31,7 @@ const Result = (props) => {
         </div>
         <Link to="/game">
           {" "}
-          <button onClick={() => resetGame(true)} className="btn btn-primary m-4">
+          <button onClick={() => newGame()} className="btn btn-primary m-4">
             new game
           </button>
         </Link>

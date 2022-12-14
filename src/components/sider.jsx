@@ -1,10 +1,10 @@
 import React from "react";
-import NavBar from "./header/navBar";
+import Help from "./sider/help";
 
 const Sider = (props) => {
   return (
     <React.Fragment>
-      <NavBar {...props} />
+      <Help {...props} />
     </React.Fragment>
   );
 };

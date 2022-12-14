@@ -1,6 +1,6 @@
 import React from "react";
 
-const Help = () => {
+const Help = (props) => {
   return (
     <React.Fragment>
       <div className="mt-3" style={{display: 'flex', flexDirection: 'column', gap: 60}}>

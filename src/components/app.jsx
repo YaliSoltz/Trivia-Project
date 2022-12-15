@@ -462,8 +462,8 @@ class App extends Component {
       {
         questionText: "What is the official language of Israel?",
         answerOptions: [
-          { answerText: "Hebrew", isCorrect: true },
           { answerText: "Arabic", isCorrect: false },
+          { answerText: "Hebrew", isCorrect: true },
           { answerText: "English", isCorrect: false },
           { answerText: "Russian", isCorrect: false },
         ],
@@ -531,16 +531,19 @@ class App extends Component {
       </React.Fragment>
     );
   }
-  handleScore = () => {
+  //------------------------------------
+  handleScore = () => { // פונקציה שמעלה ניקוד
     let score = this.state.score + 1;
     this.setState({ score });
   };
-  handleCurrentQuestion = () => {
+  //------------------------------------
+  handleCurrentQuestion = () => { // פונקציה שמעבירה לשאלה הבאה
     this.setState({ currentQuestion: this.state.currentQuestion + 1 });
   };
-  newGame = () => {
+  //------------------------------------
+  newGame = () => { // פונקציה שמשנה את התוצאת שיא|מאפסת תוצאה|מאפסת את מספר השאלה|מפעילה תצוגה למעלה|מבלגנת את השאלות|מכניסה 20 שאלות למערך חדש
     if (this.state.highScore < this.state.score)
-      this.setState({ highScore: this.state.score });
+    this.setState({ highScore: this.state.score });
     this.setState({ score: 0 });
     this.setState({ currentQuestion: 0 });
     this.setState({ showNavBar: true });
@@ -548,9 +551,11 @@ class App extends Component {
     this.setState({ questions });
     this.setState({ randomQuestions: this.state.questions.slice(0, 20) });
   };
-  handleShowNavBar = () => {
+  //------------------------------------
+  handleShowNavBar = () => { // פונקציה שמבטלת תצוגה למעלה
     this.setState({ showNavBar: false });
   };
+  //------------------------------------
 }
 
 export default App;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import backgroundImg from "../images/quiz.png";
 import { Link } from "react-router-dom";
+import '../trivYali.css'
 
 const Questions = (props) => {
   const {
@@ -11,14 +12,35 @@ const Questions = (props) => {
     handleCurrentQuestion,
     handleShowNavBar,
   } = props;
-  const [showScore, setShowScore] = useState(false);
-  const handleAnswerButtonClick = (isCorrect) => {
+//------------------------------------
+  const [showScore, setShowScore] = useState(false); // מציג את הכפתור של סוף המשחק
+//------------------------------------
+  const [help, SetHelp] = useState(false); // מציג 4 תשובות או 2
+//------------------------------------
+  const [helpDisabled, setHelpDisabled] = useState(false); // כפתור עזרה דלוק או כבוי
+//------------------------------------
+  const arr = randomQuestions[currentQuestion].answerOptions.sort( // מערך של 4 תשובות מבולגנות
+    () => Math.random() - 0.5);
+//------------------------------------
+  const helpArr = [...arr] .sort((a, b) =>{ // מערך של 2 תשובות מבולגנות
+    if (a.isCorrect === b.isCorrect)
+      return 0;
+      return a.isCorrect ? -1 : 1;
+    }).slice(0, 2).sort(() => Math.random() - 0.5);
+//------------------------------------
+  const handleAnswerButtonClick = (isCorrect) => { // פונקציה המעבירה לשאלה הבאה או מציגה כפתור סיום|סופרת ניקוד|מחזירה ל4 תשובות|
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < randomQuestions.length) handleCurrentQuestion();
     else setShowScore(true);
     if (isCorrect) handleScore();
+    SetHelp(false);
   };
-
+//------------------------------------
+  const helpButton = () => { // מציג 2 תשובה ומכבה את כפתור העזרה
+    SetHelp(true);
+    setHelpDisabled(true);
+  };
+//------------------------------------
   return (
     <React.Fragment>
       <div
@@ -40,6 +62,15 @@ const Questions = (props) => {
             </span>
           </h1>
         </div>
+        <span>
+          <button
+            disabled={helpDisabled}
+            onClick={() => helpButton()}
+            className="btn btn-primary"
+          >
+            HELP?
+          </button>
+        </span>
         <div style={{ margin: "auto" }}>
           <div
             className="m-5"
@@ -51,23 +82,34 @@ const Questions = (props) => {
               border: "solid aqua 10px",
             }}
           >
-            {randomQuestions[currentQuestion].answerOptions
-              .sort(() => Math.random() - 0.5)
-              .map((answerOptions) => (
-                // <Link to={answerOptions.isCorrect ? '':'/result'}>
-                <button
-                  style={{ width: 250, height: 50 }}
-                  disabled={showScore ? "disabled" : ""}
-                  key={answerOptions.answerText}
-                  className="btn btn-secondary m-2"
-                  onClick={() =>
-                    handleAnswerButtonClick(answerOptions.isCorrect)
-                  }
-                >
-                  {answerOptions.answerText}
-                </button>
-                // </Link>
-              ))}
+            {help
+              ? helpArr.map((answerOptions, index) => (
+                  <button
+                    style={{ width: 250, height: 50 }}
+                    disabled={showScore ? "disabled" : ""}
+                    key={index}
+                    
+                    className="glow-on-hover m-2"
+                    onClick={() =>
+                      handleAnswerButtonClick(answerOptions.isCorrect)
+                    }
+                  >
+                    {answerOptions.answerText}
+                  </button>
+                ))
+              : arr.map((answerOptions) => (
+                  <button
+                    style={{ width: 250, height: 50 }}
+                    disabled={showScore ? "disabled" : ""}
+                    key={answerOptions.answerText}
+                    className="glow-on-hover m-2"
+                    onClick={() =>
+                      handleAnswerButtonClick(answerOptions.isCorrect)
+                    }
+                  >
+                    {answerOptions.answerText}
+                  </button>
+                ))}
           </div>
         </div>
         <div>

@@ -13,15 +13,19 @@ const NavBar = (props) => {
   } = props;
   return (
     <React.Fragment>
-      <nav id="nav_bar" class="navbar" style={{ borderRadius: 20}}>
-        <div class="container-fluid">
+      <nav
+        id="nav_bar"
+        className="navbar"
+        style={{ borderRadius: "20px 20px 0px 0px" }}
+      >
+        <div className="container-fluid">
           <div id="name">
             <img
               src={logoImg}
               alt="Logo"
               width="100"
               height="80"
-              class="d-inline-block align-text-top"
+              className="d-inline-block align-text-top"
             />
           </div>
           <div id="score_and_question">
@@ -35,7 +39,12 @@ const NavBar = (props) => {
               </div>
             ) : (
               <Link to="/" id="home">
-                <h2 style={{marginRight: '6vw'}} onClick={() => handleShowNavBar(false)}>Home</h2>
+                <h2
+                  style={{ marginRight: "6vw" }}
+                  onClick={() => handleShowNavBar(false)}
+                >
+                  Home
+                </h2>
               </Link>
             )}
           </div>

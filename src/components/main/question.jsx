@@ -10,36 +10,45 @@ const Questions = (props) => {
     currentQuestion,
     handleCurrentQuestion,
     handleShowNavBar,
-    increaseCounter,
-    counter,
   } = props;
-
   const [showScore, setShowScore] = useState(false);
   const handleAnswerButtonClick = (isCorrect) => {
-    if (isCorrect) {
-      handleScore();
-    } else increaseCounter();
-
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < randomQuestions.length) handleCurrentQuestion();
     else setShowScore(true);
+    if (isCorrect) handleScore();
   };
 
   return (
     <React.Fragment>
-      <div style={{ backgroundImage: `url(${backgroundImg})`, height: "86.2vh",display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+      <div
+        style={{
+          backgroundImage: `url(${backgroundImg})`,
+          height: "86.2vh",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
         <div>
-          <h1><span className="badge text-bg-info">{randomQuestions[currentQuestion].questionText}</span></h1>
+          <h1>
+            <span
+              className="badge text-bg-info"
+              style={{ boxShadow: "10px 10px 10px 1px" }}
+            >
+              {randomQuestions[currentQuestion].questionText}
+            </span>
+          </h1>
         </div>
-        <div style={{ marginLeft: 300, marginRight: 300 }}>
+        <div style={{ margin: "auto" }}>
           <div
             className="m-5"
             style={{
               display: "flex",
               flexDirection: "column",
-              borderStyle: 'dashed',
-              borderRadius: 10,
-              justifyContent: 'center'
+              borderRadius: 15,
+              justifyContent: "center",
+              border: "solid aqua 10px",
             }}
           >
             {randomQuestions[currentQuestion].answerOptions
@@ -47,9 +56,10 @@ const Questions = (props) => {
               .map((answerOptions) => (
                 // <Link to={answerOptions.isCorrect ? '':'/result'}>
                 <button
+                  style={{ width: 250, height: 50 }}
                   disabled={showScore ? "disabled" : ""}
                   key={answerOptions.answerText}
-                  className="btn btn-secondary m-1"
+                  className="btn btn-secondary m-2"
                   onClick={() =>
                     handleAnswerButtonClick(answerOptions.isCorrect)
                   }
@@ -67,12 +77,12 @@ const Questions = (props) => {
                 <span
                   style={{ backgroundColor: "red", width: 200, height: 200 }}
                 >
-                  End of game
+                  GAME OVER
                 </span>
               </h3>
               <Link to="/result">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary m-2"
                   onClick={() => handleShowNavBar()}
                 >
                   see result

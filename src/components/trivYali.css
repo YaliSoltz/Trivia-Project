@@ -7,3 +7,13 @@
     background-color: purple;
 
 }
+
+.correct-animation-enter {
+    opacity: 0;
+  }
+  
+  .correct-animation-enter-active {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  

@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import Header from "./header";
 import Main from "./main";
-import Sider from "./sider";
-import backgroundImage from './images/background1.jpg'
+import backgroundImage from "./images/background1.jpg";
 class App extends Component {
   state = {
     questions: [
       {
         questionText: "What is the capital of France?",
         answerOptions: [
-          { answerText: "New York", isCorrect: false },
+          { answerText: "New York" },
           { answerText: "London", isCorrect: false },
           { answerText: "Paris", isCorrect: true },
           { answerText: "Dublin", isCorrect: false },
@@ -200,9 +199,9 @@ class App extends Component {
         questionText: "Which is not a fruit?",
         answerOptions: [
           { answerText: "Tomato", isCorrect: true },
-          { answerText: "", isCorrect: false },
-          { answerText: "", isCorrect: false },
-          { answerText: "", isCorrect: false },
+          { answerText: "Apple", isCorrect: false },
+          { answerText: "Banana", isCorrect: false },
+          { answerText: "Mango", isCorrect: false },
         ],
       },
       {
@@ -473,7 +472,6 @@ class App extends Component {
     score: 0,
     highScore: 0,
     currentQuestion: 0,
-    counter: 0,
     showNavBar: false,
     randomQuestions: [
       {
@@ -484,50 +482,51 @@ class App extends Component {
           </div>
         ),
         answerOptions: [
-          { answerText: "", isCorrect: false },
-          { answerText: "", isCorrect: false },
-          { answerText: "", isCorrect: true },
-          { answerText: "", isCorrect: false },
+          { answerText: "❌" },
+          { answerText: "❌" },
+          { answerText: "❌" },
+          { answerText: "❌" },
         ],
       },
     ],
   };
+
   render() {
     return (
       <React.Fragment>
-        <div style={{backgroundImage: `url(${backgroundImage})`, height: '100vh'}}>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col">
-              <Header
-                currentQuestion={this.state.currentQuestion}
-                randomQuestions={this.state.randomQuestions}
-                showNavBar={this.state.showNavBar}
-                handleShowNavBar={(val) => this.handleShowNavBar(val)}
-                highScore={this.state.highScore}
-              />
+        <div
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            height: "100vh",
+          }}
+        >
+          <div className="container text-center">
+            <div className="row">
+              <div className="col">
+                <Header
+                  currentQuestion={this.state.currentQuestion}
+                  randomQuestions={this.state.randomQuestions}
+                  showNavBar={this.state.showNavBar}
+                  handleShowNavBar={(val) => this.handleShowNavBar(val)}
+                  highScore={this.state.highScore}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <Main
+                  randomQuestions={this.state.randomQuestions}
+                  handleScore={() => this.handleScore()}
+                  currentQuestion={this.state.currentQuestion}
+                  handleCurrentQuestion={() => this.handleCurrentQuestion()}
+                  newGame={() => this.newGame()}
+                  score={this.state.score}
+                  handleShowNavBar={(val) => this.handleShowNavBar(val)}
+                  nextQuestionButton={this.state.nextQuestionButton}
+                />
+              </div>
             </div>
           </div>
-          <div className="row">
-            {/* <div className="col-1" style={{backgroundColor: 'purple', borderRadius: 10}}>
-              <Sider />
-            </div> */}
-            <div className="col">
-              <Main
-                randomQuestions={this.state.randomQuestions}
-                handleScore={() => this.handleScore()}
-                currentQuestion={this.state.currentQuestion}
-                handleCurrentQuestion={() => this.handleCurrentQuestion()}
-                newGame={() => this.newGame()}
-                score={this.state.score}
-                handleShowNavBar={(val) => this.handleShowNavBar(val)}
-                nextQuestionButton={this.state.nextQuestionButton}
-                increaseCounter={() => this.increaseCounter()}
-                counter={this.state.counter}
-              />
-            </div>
-          </div>
-        </div>
         </div>
       </React.Fragment>
     );
@@ -543,22 +542,14 @@ class App extends Component {
     if (this.state.highScore < this.state.score)
       this.setState({ highScore: this.state.score });
     this.setState({ score: 0 });
-    this.setState({ counter: 0 });
     this.setState({ currentQuestion: 0 });
     this.setState({ showNavBar: true });
     let questions = this.state.questions.sort(() => Math.random() - 0.5);
     this.setState({ questions });
     this.setState({ randomQuestions: this.state.questions.slice(0, 20) });
-
-    // }
   };
   handleShowNavBar = () => {
     this.setState({ showNavBar: false });
-  };
-
-  increaseCounter = () => {
-    this.setState({ counter: this.state.counter + 1 });
-    console.log(this.state.counter);
   };
 }
 

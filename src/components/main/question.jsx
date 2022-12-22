@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import backgroundImg from "../images/quiz.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../trivYali.css'
 
 const Questions = (props) => {
@@ -11,9 +11,13 @@ const Questions = (props) => {
     currentQuestion,
     handleCurrentQuestion,
     handleShowNavBar,
+    counter,
+    increaseCounter,
   } = props;
 //------------------------------------
   const [showScore, setShowScore] = useState(false); // מציג את הכפתור של סוף המשחק
+//------------------------------------
+const navigate = useNavigate() // מעביר לעמוד סיום
 //------------------------------------
   const [help, SetHelp] = useState(false); // מציג 4 תשובות או 2
 //------------------------------------
@@ -29,10 +33,11 @@ const Questions = (props) => {
     }).slice(0, 2).sort(() => Math.random() - 0.5);
 //------------------------------------
   const handleAnswerButtonClick = (isCorrect) => { // פונקציה המעבירה לשאלה הבאה או מציגה כפתור סיום|סופרת ניקוד|מחזירה ל4 תשובות|
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < randomQuestions.length) handleCurrentQuestion();
-    else setShowScore(true);
     if (isCorrect) handleScore();
+    else {increaseCounter()}
+    if (currentQuestion + 1 < randomQuestions.length) handleCurrentQuestion();
+    else setShowScore(true);
+    if(counter==2 & isCorrect==false) navigate('/result')
     SetHelp(false);
   };
 //------------------------------------
@@ -119,7 +124,7 @@ const Questions = (props) => {
                 <span
                   style={{ backgroundColor: "red", width: 200, height: 200 }}
                 >
-                  GAME OVER
+                 Congratulations, you are the winner of TrivYali! Your knowledge and skills have truly shone through.
                 </span>
               </h3>
               <Link to="/result">

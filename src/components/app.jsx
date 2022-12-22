@@ -3,17 +3,10 @@ import Header from "./header";
 import Main from "./main";
 import backgroundImage from "./images/background1.jpg";
 class App extends Component {
+  
+  
   state = {
     questions: [
-      {
-        questionText: "What is the capital of France?",
-        answerOptions: [
-          { answerText: "New York" },
-          { answerText: "London", isCorrect: false },
-          { answerText: "Paris", isCorrect: true },
-          { answerText: "Dublin", isCorrect: false },
-        ],
-      },
       {
         questionText: "Who is CEO of Tesla?",
         answerOptions: [
@@ -198,7 +191,7 @@ class App extends Component {
       {
         questionText: "Which is not a fruit?",
         answerOptions: [
-          { answerText: "Tomato", isCorrect: true },
+          { answerText: "Cucumber", isCorrect: true },
           { answerText: "Apple", isCorrect: false },
           { answerText: "Banana", isCorrect: false },
           { answerText: "Mango", isCorrect: false },
@@ -370,7 +363,7 @@ class App extends Component {
       {
         questionText: "Which of these animals is not a mammal?",
         answerOptions: [
-          { answerText: "Bat", isCorrect: true },
+          { answerText: "Spider", isCorrect: true },
           { answerText: "Cat", isCorrect: false },
           { answerText: "Dog", isCorrect: false },
           { answerText: "Mouse", isCorrect: false },
@@ -469,6 +462,9 @@ class App extends Component {
         ],
       },
     ],
+    
+    lives: ['❤️','❤️','❤️'],
+    counter: 0,
     score: 0,
     highScore: 0,
     currentQuestion: 0,
@@ -509,6 +505,7 @@ class App extends Component {
                   showNavBar={this.state.showNavBar}
                   handleShowNavBar={(val) => this.handleShowNavBar(val)}
                   highScore={this.state.highScore}
+                  lives={this.state.lives}
                 />
               </div>
             </div>
@@ -523,6 +520,8 @@ class App extends Component {
                   score={this.state.score}
                   handleShowNavBar={(val) => this.handleShowNavBar(val)}
                   nextQuestionButton={this.state.nextQuestionButton}
+                  counter={this.state.counter}
+                  increaseCounter={()=> this.increaseCounter()}
                 />
               </div>
             </div>
@@ -550,10 +549,18 @@ class App extends Component {
     let questions = this.state.questions.sort(() => Math.random() - 0.5);
     this.setState({ questions });
     this.setState({ randomQuestions: this.state.questions.slice(0, 20) });
+    this.setState({counter: 0})
+    this.setState({lives:['❤️','❤️','❤️']})
   };
   //------------------------------------
   handleShowNavBar = () => { // פונקציה שמבטלת תצוגה למעלה
     this.setState({ showNavBar: false });
+  };
+  //------------------------------------
+  increaseCounter = ()=>{
+    this.setState({counter: this.state.counter + 1});
+    this.state.lives.pop();
+    this.setState({lives: this.state.lives});
   };
   //------------------------------------
 }

@@ -10,6 +10,7 @@ const NavBar = (props) => {
     randomQuestions,
     showNavBar,
     handleShowNavBar,
+    lives,
   } = props;
   return (
     <React.Fragment>
@@ -51,6 +52,7 @@ const NavBar = (props) => {
           <div id="give_up">
             {showNavBar ? (
               <div>
+               <div style={{width: 100}}> <p>{lives}</p></div>
                 {" "}
                 <Link to="/result">
                   <span

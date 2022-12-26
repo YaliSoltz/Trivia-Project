@@ -58,7 +58,7 @@ const navigate = useNavigate() // מעביר לעמוד סיום
         }}
       >
         <div>
-          <h1>
+          <h1 className="bounce-in-bottom">
             <span
               className="badge text-bg-info"
               style={{ boxShadow: "10px 10px 10px 1px" }}
@@ -71,7 +71,9 @@ const navigate = useNavigate() // מעביר לעמוד סיום
           <button
             disabled={helpDisabled}
             onClick={() => helpButton()}
-            className="btn btn-primary"
+            className="btn btn-primary m-2"
+            title=" Use HELP to remove 2 false answers,
+                    you can use it only once in a game!"
           >
             HELP?
           </button>
@@ -102,11 +104,11 @@ const navigate = useNavigate() // מעביר לעמוד סיום
                     {answerOptions.answerText}
                   </button>
                 ))
-              : arr.map((answerOptions) => (
+              : arr.map((answerOptions, index) => (
                   <button
                     style={{ width: 250, height: 50 }}
                     disabled={showScore ? "disabled" : ""}
-                    key={answerOptions.answerText}
+                    key={index}
                     className="glow-on-hover m-2"
                     onClick={() =>
                       handleAnswerButtonClick(answerOptions.isCorrect)

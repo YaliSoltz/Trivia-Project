@@ -32,16 +32,15 @@ const Result = (props) => {
             {randomQuestions.map((question, index) => (
               <div key={index}>
                 <p style={{ marginTop: 80, fontSize: 18, fontWeight: "bold" }}>
-                  {" "}
                   <span style={{ fontSize: 24, fontWeight: "bold" }}>
                     Q{index + 1}
                   </span>
                   : {question.questionText}
                 </p>
 
-                {question.answerOptions.map((answerOptions) => (
+                {question.answerOptions.map((answerOptions, index) => (
                   <button
-                    key={answerOptions.answerText}
+                    key={index}
                     style={{
                       borderRadius: 20,
                       margin: 2,
